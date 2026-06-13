@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Minimal Quit | برنامه مینیمال ترک سیگار</title>
+    <title>نفس تازه | ترک سیگار هوشمند پویا</title>
     <style>
-        /* -------------------- RESET & BASE (مینیمال و مدرن) -------------------- */
         * {
             margin: 0;
             padding: 0;
@@ -13,7 +12,7 @@
         }
 
         body {
-            background: #f2f4f8;
+            background: #f0f4f9;
             font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
             padding: 1.5rem;
             min-height: 100vh;
@@ -23,35 +22,31 @@
             direction: rtl;
         }
 
-        /* کارت اصلی مینیمال - حذف سایه‌های سنگین و خطوط اضافه */
         .card {
-            max-width: 560px;
+            max-width: 600px;
             width: 100%;
             margin: 0 auto;
             background: #ffffff;
-            border-radius: 32px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.03), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            border-radius: 40px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03), 0 2px 6px rgba(0, 0, 0, 0.05);
             overflow: hidden;
-            transition: all 0.2s ease;
-            border: 1px solid #eef2f5;
+            border: 1px solid #eef2f8;
         }
 
-        /* هدر مینیمال */
         .header {
             padding: 28px 28px 16px 28px;
             background: white;
-            border-bottom: 1px solid #f0f2f5;
+            border-bottom: 1px solid #f0f3f8;
         }
 
-        .badge-light {
-            background: #f0f3f8;
+        .badge {
+            background: #e8f0ec;
             display: inline-block;
             padding: 4px 12px;
             border-radius: 40px;
             font-size: 0.7rem;
             font-weight: 600;
-            letter-spacing: 0.3px;
-            color: #2c3e50;
+            color: #2c7a4d;
             margin-bottom: 12px;
         }
 
@@ -60,7 +55,7 @@
             font-weight: 650;
             letter-spacing: -0.5px;
             color: #1a2c3e;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -73,7 +68,6 @@
             font-weight: 400;
         }
 
-        /* اطلاعات هفته و هدف روزانه */
         .info-strip {
             padding: 16px 28px;
             background: #fafcff;
@@ -95,16 +89,15 @@
         }
 
         .daily-goal {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             background: #ffffff;
             border: 1px solid #e2e8f0;
             border-radius: 80px;
             padding: 5px 14px;
-            color: #2c5f2d;
+            color: #2c7a4d;
             font-weight: 500;
         }
 
-        /* بخش پیشرفت ساده */
         .progress-area {
             padding: 18px 28px 12px 28px;
             background: white;
@@ -115,8 +108,6 @@
             justify-content: space-between;
             font-size: 0.75rem;
             font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.4px;
             color: #4a5b6e;
             margin-bottom: 8px;
         }
@@ -136,26 +127,31 @@
             transition: width 0.25s ease;
         }
 
-        /* کارت محدودیت‌ها (مینیمال و شفاف) */
-        .constraints-card {
+        .stats-card {
             background: #ffffff;
             margin: 8px 24px 12px 24px;
-            padding: 14px 20px;
+            padding: 16px 20px;
             border-radius: 28px;
             border: 1px solid #eef2f8;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
         }
 
         .info-row {
             display: flex;
             justify-content: space-between;
             font-size: 0.85rem;
-            padding: 8px 0;
+            padding: 10px 0;
             border-bottom: 1px dashed #ecf0f3;
         }
 
         .info-row:last-child {
             border-bottom: none;
+        }
+
+        .highlight {
+            font-weight: 700;
+            color: #1e4663;
+            font-family: monospace;
+            font-size: 0.9rem;
         }
 
         .timer-minimal {
@@ -167,12 +163,70 @@
             border: 1px solid #eef2f8;
         }
 
-        .countdown-digit {
+        .timer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .timer-box {
+            flex: 1;
+            text-align: center;
+            background: white;
+            border-radius: 28px;
+            padding: 8px 12px;
+            border: 1px solid #edf2f7;
+        }
+
+        .timer-label {
+            font-size: 0.6rem;
+            color: #8a9bb0;
+            letter-spacing: 0.3px;
+        }
+
+        .timer-value {
             font-family: 'SF Mono', 'Fira Code', monospace;
-            font-size: 1.9rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #2c7a4d;
+        }
+
+        .countdown-digit {
+            font-family: 'SF Mono', monospace;
+            font-size: 1.6rem;
             font-weight: 600;
             color: #1e4663;
-            letter-spacing: 2px;
+        }
+
+        .btn-primary {
+            display: block;
+            width: calc(100% - 48px);
+            margin: 16px auto 20px;
+            background: #1e3b2c;
+            border: none;
+            padding: 16px 12px;
+            font-size: 1.05rem;
+            font-weight: 550;
+            color: white;
+            border-radius: 44px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.97);
+            background: #0f2b1f;
+        }
+
+        .btn-primary:disabled {
+            background: #bdc3ce;
+            cursor: not-allowed;
+            opacity: 0.6;
+            transform: none;
         }
 
         .warning-toast {
@@ -185,38 +239,6 @@
             color: #8a6300;
         }
 
-        /* دکمه مینیمال اما با تأکید */
-        .btn-primary {
-            display: block;
-            width: calc(100% - 48px);
-            margin: 16px auto 20px;
-            background: #1e3b2c;
-            border: none;
-            padding: 16px 12px;
-            font-size: 1.1rem;
-            font-weight: 550;
-            color: white;
-            border-radius: 44px;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-align: center;
-            letter-spacing: 0.3px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-        }
-
-        .btn-primary:active {
-            transform: scale(0.97);
-            background: #0f2b1f;
-        }
-
-        .btn-primary:disabled {
-            background: #bdc3ce;
-            cursor: not-allowed;
-            transform: none;
-            opacity: 0.6;
-        }
-
-        /* تاریخچه روز - مینیمال */
         .history-module {
             background: #ffffff;
             margin: 8px 24px 24px;
@@ -276,19 +298,19 @@
             border-top: 1px solid #eff2f8;
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 500px) {
             body { padding: 1rem; }
-            .btn-primary { font-size: 1rem; }
-            .countdown-digit { font-size: 1.5rem; }
+            .timer-value { font-size: 0.9rem; }
+            .countdown-digit { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
 <div class="card">
     <div class="header">
-        <div class="badge-light">🚭 ۴ هفته · کاهش هوشمند</div>
-        <h1>نفس تازه <span style="font-weight: 400;"></span></h1>
-        <div class="subhead"></div>
+        <div class="badge">🌿 پویا · تغییر فاصله در میانه هفته</div>
+        <h1>نفس تازه <span style="font-weight: 400;">نسخه هوشمند</span></h1>
+        <div class="subhead">میانگین فاصله سیگارها · زمان سپری شده · کاهش پویا</div>
     </div>
 
     <div class="info-strip">
@@ -306,18 +328,28 @@
         </div>
     </div>
 
-    <div class="constraints-card">
+    <div class="stats-card">
+        <div class="info-row">
+            <span>📊 میانگین فاصله بین سیگارها (امروز):</span>
+            <strong class="highlight" id="avgGapDisplay">--</strong>
+        </div>
         <div class="info-row">
             <span>🕒 آخرین سیگار:</span>
             <strong id="lastSmokeTime">--:--</strong>
         </div>
-        <div class="info-row">
-            <span>⏱️ حداقل فاصله لازم (طبق هفته):</span>
-            <strong id="requiredGapMinutes">۶۰ دقیقه</strong>
+        <div class="timer-row">
+            <div class="timer-box">
+                <div class="timer-label">⏱️ زمان سپری شده از آخرین سیگار</div>
+                <div class="timer-value" id="elapsedSinceLast">--:--:--</div>
+            </div>
+            <div class="timer-box">
+                <div class="timer-label">⏳ فاصله مجاز کنونی (پویا)</div>
+                <div class="timer-value" id="requiredGapMinutes">۶۰ دقیقه</div>
+            </div>
         </div>
         <div class="timer-minimal">
-            <div style="font-size: 0.7rem; margin-bottom: 6px;">زمان مجاز برای سیگار بعدی</div>
-            <div class="countdown-digit" id="countdownTimer">اکنون می‌توانی</div>
+            <div style="font-size: 0.7rem; margin-bottom: 6px;">⏰ زمان باقی‌مانده تا مجاز شدن</div>
+            <div class="countdown-digit" id="countdownTimer">✅ آماده ثبت</div>
         </div>
     </div>
 
@@ -327,7 +359,7 @@
 
     <div class="history-module">
         <div class="history-header">
-            <span>📋 امروز</span>
+            <span>📋 تاریخچه امروز</span>
             <button id="resetDayBtn" class="reset-link">بازنشانی امروز</button>
         </div>
         <div id="historyListContainer" class="history-list">
@@ -335,43 +367,43 @@
         </div>
     </div>
     <footer>
-        قوانین پویا · هفته ۱ (۱۵ نخ/روز ، حداقل ۱ ساعت فاصله) · کاهش پیشرونده
+        📈 میانگین فاصله لحظه‌ای · فاصله مجاز هر ۳-۴ روز بهبود می‌یابد · کاهش پویا بین هفته‌ها
     </footer>
 </div>
 
 <script>
     // --------------------------------------------------------------
-    // برنامه کاهش مینیمال - 4 هفته
-    // هفته 1: max=15 , gap= 60 دقیقه
-    // هفته 2: max=9  , gap= 90 دقیقه
-    // هفته 3: max=4  , gap= 180 دقیقه (3 ساعت)
-    // هفته 4: max=1  , gap= 360 دقیقه (6 ساعت)
-    // --------------------------------------------------------------
-    const PLAN = {
-        week1: { maxPerDay: 15, gapMinutes: 60 },
-        week2: { maxPerDay: 9,  gapMinutes: 90 },
-        week3: { maxPerDay: 4,  gapMinutes: 180 },
-        week4: { maxPerDay: 1,  gapMinutes: 360 }
+    // برنامه پویا با تغییر فاصله در میانه هر هفته
+    // هفته 1: نیمه اول 60min , نیمه دوم 75min
+    // هفته 2: نیمه اول 90min , نیمه دوم 105min
+    // هفته 3: نیمه اول 150min, نیمه دوم 180min
+    // هفته 4: نیمه اول 300min, نیمه دوم 360min
+    // ==============================================================
+    
+    const WEEKLY_MAX = { 1: 15, 2: 10, 3: 5, 4: 2 };
+    const GAP_SCHEDULE = {
+        1: { firstHalf: 60, secondHalf: 75 },
+        2: { firstHalf: 90, secondHalf: 105 },
+        3: { firstHalf: 150, secondHalf: 180 },
+        4: { firstHalf: 300, secondHalf: 360 }
     };
 
-    // LocalStorage کلید
-    const STORAGE_KEY = "MinimalQuitApp";
+    const STORAGE_KEY = "DynamicQuitApp";
     let appState = {
-        startDate: null,      // تاریخ شروع YYYY-MM-DD
-        smokeLogs: []         // آرایه از { timestamp: number }
+        startDate: null,
+        smokeLogs: []
     };
 
-    // متغیرهای وضعیت
     let currentWeek = 1;
     let todayMax = 15;
-    let requiredGapMs = 60 * 60 * 1000;  // 1 ساعت
+    let currentRequiredGapMs = 60 * 60 * 1000;
     let todaySmokedCount = 0;
     let lastSmokeTimeMs = null;
-
-    // تایمر شمارش معکوس - یک نمونه global
+    
     let countdownIntervalId = null;
-
-    // عناصر DOM
+    let elapsedIntervalId = null;
+    
+    // DOM elements
     const weekDisplaySpan = document.getElementById("weekDisplay");
     const dailyLimitDisplaySpan = document.getElementById("dailyLimitDisplay");
     const smokedCounterSpan = document.getElementById("smokedCounter");
@@ -379,208 +411,237 @@
     const progressFillDiv = document.getElementById("progressFill");
     const lastSmokeTimeSpan = document.getElementById("lastSmokeTime");
     const requiredGapMinutesSpan = document.getElementById("requiredGapMinutes");
+    const avgGapDisplaySpan = document.getElementById("avgGapDisplay");
     const countdownTimerDiv = document.getElementById("countdownTimer");
+    const elapsedSinceLastSpan = document.getElementById("elapsedSinceLast");
     const warningMsgDiv = document.getElementById("warningMsg");
     const logSmokeBtn = document.getElementById("logSmokeBtn");
     const resetDayBtn = document.getElementById("resetDayBtn");
     const historyListContainer = document.getElementById("historyListContainer");
-
-    // ------------------- توابع کمکی تاریخ -------------------
+    
+    // ----- توابع تاریخ و هفته -----
     function getTodayDateStr() {
         const now = new Date();
         return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
     }
-
-    // شروع برنامه (اگر startDate نبود امروز قرار بده)
-    function initStartDate() {
+    
+    function getStartDate() {
         if (!appState.startDate) {
             appState.startDate = getTodayDateStr();
             saveState();
         }
         return appState.startDate;
     }
-
-    // محاسبه هفته جاری بر اساس روز شروع (هر 7 روز یک هفته)
-    function calculateCurrentWeek() {
-        if (!appState.startDate) return 1;
-        const start = new Date(appState.startDate);
+    
+    function getWeekAndDayIndex() {
+        const start = new Date(getStartDate());
         start.setHours(0,0,0,0);
         const today = new Date();
         today.setHours(0,0,0,0);
-        const diffDays = Math.floor((today - start) / (1000 * 60 * 60 * 24));
-        if (diffDays < 0) return 1;
-        if (diffDays < 7) return 1;
-        if (diffDays < 14) return 2;
-        if (diffDays < 21) return 3;
-        return 4;
+        const diffDays = Math.floor((today - start) / (86400000));
+        if (diffDays < 0) return { week: 1, dayInWeek: 0 };
+        let week = Math.floor(diffDays / 7) + 1;
+        if (week > 4) week = 4;
+        const dayInWeek = diffDays % 7;
+        return { week, dayInWeek };
     }
-
-    // گرفتن تنظیمات هفته
-    function getPlanByWeek(week) {
-        if (week === 1) return PLAN.week1;
-        if (week === 2) return PLAN.week2;
-        if (week === 3) return PLAN.week3;
-        return PLAN.week4;
+    
+    function computeDynamicGapMs(week, dayInWeek) {
+        const schedule = GAP_SCHEDULE[week] || GAP_SCHEDULE[4];
+        let gapMinutes;
+        if (dayInWeek <= 2) {
+            gapMinutes = schedule.firstHalf;
+        } else {
+            gapMinutes = schedule.secondHalf;
+        }
+        return gapMinutes * 60 * 1000;
     }
-
-    // به روز رسانی محدودیت‌ها بر اساس هفته
-    function updateLimitsBasedOnWeek() {
-        const newWeek = calculateCurrentWeek();
-        currentWeek = newWeek;
-        const plan = getPlanByWeek(currentWeek);
-        todayMax = plan.maxPerDay;
-        requiredGapMs = plan.gapMinutes * 60 * 1000;
-
-        // نمایش در UI
+    
+    function updateAllLimits() {
+        const { week, dayInWeek } = getWeekAndDayIndex();
+        currentWeek = week;
+        todayMax = WEEKLY_MAX[currentWeek];
+        currentRequiredGapMs = computeDynamicGapMs(currentWeek, dayInWeek);
+        
         weekDisplaySpan.innerText = `هفته ${currentWeek}`;
         dailyLimitDisplaySpan.innerText = `حداکثر امروز: ${todayMax} نخ`;
         maxCounterSpan.innerText = todayMax;
-        requiredGapMinutesSpan.innerText = `${plan.gapMinutes} دقیقه`;
+        const gapMinutesShow = Math.floor(currentRequiredGapMs / 60000);
+        requiredGapMinutesSpan.innerText = `${gapMinutesShow} دقیقه`;
     }
-
-    // گرفتن لاگ‌های امروز
+    
     function getTodayLogs() {
         const todayStr = getTodayDateStr();
         const todayStart = new Date(todayStr + "T00:00:00").getTime();
         const tomorrowStart = todayStart + 86400000;
         return appState.smokeLogs.filter(log => log.timestamp >= todayStart && log.timestamp < tomorrowStart);
     }
-
-    // بروزرسانی آمار روز (تعداد، آخرین زمان، پیشرفت)
+    
+    function computeAverageGap(todayLogs) {
+        if (todayLogs.length < 2) return null;
+        let totalGapMs = 0;
+        for (let i = 1; i < todayLogs.length; i++) {
+            totalGapMs += (todayLogs[i].timestamp - todayLogs[i-1].timestamp);
+        }
+        const avgMs = totalGapMs / (todayLogs.length - 1);
+        return Math.floor(avgMs / 60000);
+    }
+    
     function refreshDailyStats() {
         const todayLogs = getTodayLogs();
         todaySmokedCount = todayLogs.length;
         smokedCounterSpan.innerText = todaySmokedCount;
         const percent = (todaySmokedCount / todayMax) * 100;
         progressFillDiv.style.width = `${Math.min(percent, 100)}%`;
-
+        
         if (todayLogs.length > 0) {
             const lastLog = todayLogs[todayLogs.length - 1];
             lastSmokeTimeMs = lastLog.timestamp;
             const lastDate = new Date(lastLog.timestamp);
             lastSmokeTimeSpan.innerText = `${lastDate.getHours().toString().padStart(2,'0')}:${lastDate.getMinutes().toString().padStart(2,'0')}:${lastDate.getSeconds().toString().padStart(2,'0')}`;
+            
+            const avg = computeAverageGap(todayLogs);
+            if (avg !== null) {
+                avgGapDisplaySpan.innerText = `${avg} دقیقه`;
+            } else {
+                avgGapDisplaySpan.innerText = `(نیاز به ۲ سیگار)`;
+            }
         } else {
             lastSmokeTimeMs = null;
             lastSmokeTimeSpan.innerText = "--:--";
+            avgGapDisplaySpan.innerText = "---";
         }
         renderHistory();
-        // بعد از تغییر آمار، تایمر و وضعیت دکمه را بروز کن
         updateCountdownAndButton();
+        startElapsedTimer();
     }
-
-    // تابع اصلی: نمایش همیشه شمارش معکوس بدون نوسان بین متن‌های مختلف (فقط پیام مجاز / زمان باقی)
+    
+    // تابع اصلاح شده برای نمایش صحیح زمان سپری شده
+    function startElapsedTimer() {
+        if (elapsedIntervalId) clearInterval(elapsedIntervalId);
+        
+        if (!lastSmokeTimeMs) {
+            elapsedSinceLastSpan.innerText = "--:--:--";
+            return;
+        }
+        
+        const updateElapsed = () => {
+            const now = Date.now();
+            const elapsedMs = now - lastSmokeTimeMs;
+            if (elapsedMs < 0) return;
+            
+            // محاسبه صحیح ساعت، دقیقه و ثانیه
+            const totalSeconds = Math.floor(elapsedMs / 1000);
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            
+            if (hours > 0) {
+                elapsedSinceLastSpan.innerText = `${hours}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+            } else {
+                elapsedSinceLastSpan.innerText = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+            }
+        };
+        
+        updateElapsed();
+        elapsedIntervalId = setInterval(updateElapsed, 1000);
+    }
+    
     function updateCountdownAndButton() {
-        // اول بررسی محدودیت تعداد روزانه
         if (todaySmokedCount >= todayMax) {
             if (countdownIntervalId) clearInterval(countdownIntervalId);
-            countdownTimerDiv.innerText = "❌ به حد مجاز روزانه رسیدی";
+            countdownTimerDiv.innerText = "❌ حد مجاز روزانه تکمیل";
             logSmokeBtn.disabled = true;
             return;
         }
-
-        // اگر اصلاً سیگاری نزده‌ایم => مجاز کامل
         if (lastSmokeTimeMs === null) {
             if (countdownIntervalId) clearInterval(countdownIntervalId);
             countdownTimerDiv.innerText = "✅ آماده ثبت سیگار";
             logSmokeBtn.disabled = false;
             return;
         }
-
-        // بررسی فاصله زمانی
         const now = Date.now();
         const elapsed = now - lastSmokeTimeMs;
-        if (elapsed >= requiredGapMs) {
-            // زمان مجاز رسیده
+        if (elapsed >= currentRequiredGapMs) {
             if (countdownIntervalId) clearInterval(countdownIntervalId);
             countdownTimerDiv.innerText = "✅ اکنون می‌توانی سیگار بکشی";
             logSmokeBtn.disabled = false;
             return;
         } else {
-            // در حالت انتظار: شمارش معکوس را نشان بده (بدون جابجایی)
             logSmokeBtn.disabled = true;
-            // اگر تایمر فعال نیست، راه بینداز
             if (countdownIntervalId) clearInterval(countdownIntervalId);
             countdownIntervalId = setInterval(() => {
-                // اینجا همیشه یک تایمر زنده می‌ماند تا لحظه اتمام فاصله را بگیرد
                 const now2 = Date.now();
                 const elapsed2 = now2 - lastSmokeTimeMs;
-                if (elapsed2 >= requiredGapMs) {
-                    // شرط مجاز شدن
+                if (elapsed2 >= currentRequiredGapMs) {
                     if (countdownIntervalId) clearInterval(countdownIntervalId);
                     countdownTimerDiv.innerText = "✅ اکنون می‌توانی سیگار بکشی";
                     logSmokeBtn.disabled = false;
-                    // در صورتی که دکمه غیرفعال بود فعالش کن
                 } else {
-                    const remainMs = requiredGapMs - elapsed2;
+                    const remainMs = currentRequiredGapMs - elapsed2;
                     const minutesLeft = Math.floor(remainMs / 60000);
                     const secondsLeft = Math.floor((remainMs % 60000) / 1000);
-                    countdownTimerDiv.innerText = `${minutesLeft}:${secondsLeft.toString().padStart(2,'0')} دقیقه باقی‌مانده`;
+                    countdownTimerDiv.innerText = `${minutesLeft}:${secondsLeft.toString().padStart(2,'0')} دقیقه`;
                 }
             }, 300);
-            // مقداردهی اولیه نمایش
-            const remainMsFirst = requiredGapMs - elapsed;
+            const remainMsFirst = currentRequiredGapMs - elapsed;
             const minFirst = Math.floor(remainMsFirst / 60000);
             const secFirst = Math.floor((remainMsFirst % 60000) / 1000);
-            countdownTimerDiv.innerText = `${minFirst}:${secFirst.toString().padStart(2,'0')} دقیقه باقی‌مانده`;
-            return;
+            countdownTimerDiv.innerText = `${minFirst}:${secFirst.toString().padStart(2,'0')} دقیقه`;
         }
     }
-
-    // بررسی امکان ثبت سیگار (برای نمایش هشدار در صورت کلیک)
-    function canSmokeNowWithReason() {
+    
+    function canSmokeNow() {
         if (todaySmokedCount >= todayMax) {
-            return { allowed: false, reason: `❌ امروز به حداکثر ${todayMax} نخ رسیده‌اید. فردا دوباره تلاش کن!` };
+            return { allowed: false, reason: `❌ امروز به حد مجاز ${todayMax} نخ رسیده‌اید. فردا ادامه بده!` };
         }
         if (lastSmokeTimeMs !== null) {
-            const now = Date.now();
-            const elapsed = now - lastSmokeTimeMs;
-            if (elapsed < requiredGapMs) {
-                const remainMin = Math.ceil((requiredGapMs - elapsed) / (60 * 1000));
-                const remainSec = Math.ceil((requiredGapMs - elapsed) / 1000) % 60;
-                return { allowed: false, reason: `⏰ زودتر از موعد! باید حداقل ${Math.floor(requiredGapMs/60000)} دقیقه بین سیگارها فاصله باشد. زمان باقی: ${remainMin} دقیقه و ${remainSec} ثانیه` };
+            const elapsed = Date.now() - lastSmokeTimeMs;
+            if (elapsed < currentRequiredGapMs) {
+                const remainMin = Math.ceil((currentRequiredGapMs - elapsed) / 60000);
+                const remainSec = Math.ceil((currentRequiredGapMs - elapsed) / 1000) % 60;
+                const gapMin = Math.floor(currentRequiredGapMs / 60000);
+                return { allowed: false, reason: `⏰ زودتر از موعد! باید حداقل ${gapMin} دقیقه فاصله باشد. زمان باقی: ${remainMin} دقیقه ${remainSec} ثانیه` };
             }
         }
         return { allowed: true, reason: "" };
     }
-
-    // ثبت سیگار جدید
+    
     function logSmokeHandler() {
-        const check = canSmokeNowWithReason();
+        const check = canSmokeNow();
         if (!check.allowed) {
             warningMsgDiv.style.display = "block";
             warningMsgDiv.innerHTML = `⚠️ ${check.reason}`;
-            setTimeout(() => {
-                if (warningMsgDiv) warningMsgDiv.style.display = "none";
-            }, 4000);
+            setTimeout(() => { if(warningMsgDiv) warningMsgDiv.style.display = "none"; }, 4000);
             return;
         }
-        // ذخیره سیگار جدید
         const newLog = { timestamp: Date.now() };
         appState.smokeLogs.push(newLog);
         saveState();
-        // پس از ذخیره، آمار را به روز کن
-        refreshDailyStats();      // این تابع داخلش updateCountdownAndButton را صدا می‌زند
-
-        // پیام موفقیت غیر مزاحم
+        refreshDailyStats();
         const toast = document.createElement("div");
-        toast.innerText = "✓ سیگار ثبت شد. پایبند باش!";
-        toast.style.position = "fixed";
-        toast.style.bottom = "20px";
-        toast.style.left = "20px";
-        toast.style.right = "20px";
-        toast.style.backgroundColor = "#1e3b2c";
-        toast.style.color = "white";
-        toast.style.padding = "12px";
-        toast.style.borderRadius = "60px";
-        toast.style.textAlign = "center";
-        toast.style.fontSize = "0.85rem";
-        toast.style.zIndex = "999";
+        toast.innerText = "✓ سیگار ثبت شد. گام بعدی رو محکم بردار!";
+        toast.style.cssText = "position:fixed; bottom:20px; left:20px; right:20px; background:#1e3b2c; color:white; padding:12px; border-radius:60px; text-align:center; font-size:0.85rem; z-index:999;";
         document.body.appendChild(toast);
         setTimeout(() => toast.remove(), 1800);
         warningMsgDiv.style.display = "none";
     }
-
-    // رندر تاریخچه امروز
+    
+    function resetToday() {
+        const todayStr = getTodayDateStr();
+        const todayStart = new Date(todayStr + "T00:00:00").getTime();
+        const tomorrowStart = todayStart + 86400000;
+        appState.smokeLogs = appState.smokeLogs.filter(log => log.timestamp < todayStart || log.timestamp >= tomorrowStart);
+        saveState();
+        refreshDailyStats();
+        warningMsgDiv.style.display = "none";
+        const msg = document.createElement("div");
+        msg.innerText = "🔄 سیگارهای امروز بازنشانی شد.";
+        msg.style.cssText = "position:fixed; bottom:20px; left:20px; right:20px; background:#e9ecef; color:#2c3e50; padding:10px; border-radius:50px; text-align:center; font-size:0.8rem; z-index:999;";
+        document.body.appendChild(msg);
+        setTimeout(() => msg.remove(), 2000);
+    }
+    
     function renderHistory() {
         const todayLogs = getTodayLogs();
         if (todayLogs.length === 0) {
@@ -588,129 +649,59 @@
             return;
         }
         let html = "";
-        // نمایش از جدید به قدیم (برعکس)
         todayLogs.slice().reverse().forEach(log => {
             const d = new Date(log.timestamp);
             const timeStr = `${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}:${d.getSeconds().toString().padStart(2,'0')}`;
-            html += `<div class="history-item">
-                        <span>🚬 سیگار</span>
-                        <span>⏱️ ${timeStr}</span>
-                     </div>`;
+            html += `<div class="history-item"><span>🚬 سیگار</span><span>⏱️ ${timeStr}</span></div>`;
         });
         historyListContainer.innerHTML = html;
     }
-
-    // بازنشانی امروز (حذف لاگ‌های امروز)
-    function resetTodayLogs() {
-        const todayStr = getTodayDateStr();
-        const todayStart = new Date(todayStr + "T00:00:00").getTime();
-        const tomorrowStart = todayStart + 86400000;
-        const filteredLogs = appState.smokeLogs.filter(log => log.timestamp < todayStart || log.timestamp >= tomorrowStart);
-        appState.smokeLogs = filteredLogs;
-        saveState();
-        refreshDailyStats();
-        // پاک کردن هشدار
-        warningMsgDiv.style.display = "none";
-        const msg = document.createElement("div");
-        msg.innerText = "🔄 سیگارهای امروز بازنشانی شد. فرصتی دوباره برای پایبندی";
-        msg.style.position = "fixed";
-        msg.style.bottom = "20px";
-        msg.style.left = "20px";
-        msg.style.right = "20px";
-        msg.style.backgroundColor = "#e9ecef";
-        msg.style.color = "#2c3e50";
-        msg.style.padding = "10px";
-        msg.style.borderRadius = "50px";
-        msg.style.textAlign = "center";
-        msg.style.fontSize = "0.8rem";
-        document.body.appendChild(msg);
-        setTimeout(() => msg.remove(), 2000);
-    }
-
-    // ذخیره در localStorage
+    
     function saveState() {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
     }
-
+    
     function loadState() {
         const raw = localStorage.getItem(STORAGE_KEY);
         if (raw) {
             try {
                 const parsed = JSON.parse(raw);
-                if (parsed.startDate && parsed.smokeLogs !== undefined) {
-                    appState = parsed;
-                } else {
-                    initDefaultState();
-                }
-            } catch (e) {
-                initDefaultState();
-            }
-        } else {
-            initDefaultState();
-        }
+                if (parsed.startDate && parsed.smokeLogs !== undefined) appState = parsed;
+                else initDefault();
+            } catch(e) { initDefault(); }
+        } else { initDefault(); }
         if (!appState.startDate) appState.startDate = getTodayDateStr();
-        // حذف لاگ‌های آینده (احتمالی خطا)
         const nowMs = Date.now();
         appState.smokeLogs = appState.smokeLogs.filter(l => l.timestamp <= nowMs + 5000);
         saveState();
     }
-
-    function initDefaultState() {
-        appState = {
-            startDate: getTodayDateStr(),
-            smokeLogs: []
-        };
+    
+    function initDefault() {
+        appState = { startDate: getTodayDateStr(), smokeLogs: [] };
         saveState();
     }
-
-    // تابع periodic برای تغییر روز و هفته (بدون نیاز به رفرش صفحه)
+    
     function startAutoSync() {
         setInterval(() => {
-            // بررسی تغییر روز و هفته
-            const oldWeek = currentWeek;
-            updateLimitsBasedOnWeek();
-            refreshDailyStats();   // دوباره آمار را می‌گیرد و تایمر را درست می‌کند
-            if (oldWeek !== currentWeek) {
-                // اگر هفته تغییر کرد، هشدار خفیف با پیام
-                const plan = getPlanByWeek(currentWeek);
-                const notif = document.createElement("div");
-                notif.innerText = `📆 هفته ${currentWeek} شروع شد | حداکثر روزانه: ${plan.maxPerDay} نخ ، فاصله: ${plan.gapMinutes} دقیقه`;
-                notif.style.position = "fixed";
-                notif.style.top = "12px";
-                notif.style.left = "12px";
-                notif.style.right = "12px";
-                notif.style.backgroundColor = "#1e3b2c";
-                notif.style.color = "white";
-                notif.style.borderRadius = "30px";
-                notif.style.padding = "12px";
-                notif.style.fontSize = "0.8rem";
-                notif.style.textAlign = "center";
-                notif.style.zIndex = "1000";
-                document.body.appendChild(notif);
-                setTimeout(() => notif.remove(), 3000);
-            }
-        }, 30000); // هر 30 ثانیه بررسی کافیست
+            updateAllLimits();
+            refreshDailyStats();
+        }, 30000);
     }
-
-    // اتصال رویدادها
+    
     function bindEvents() {
         logSmokeBtn.addEventListener("click", logSmokeHandler);
-        resetDayBtn.addEventListener("click", resetTodayLogs);
+        resetDayBtn.addEventListener("click", resetToday);
     }
-
-    // مقداردهی اولیه
+    
     function init() {
         loadState();
         bindEvents();
-        updateLimitsBasedOnWeek();
+        updateAllLimits();
         refreshDailyStats();
         startAutoSync();
-        // همچنین اطمینان از اینکه هنگام بازگشت به تب focus دوباره تایمر درست کار کند
-        window.addEventListener("focus", () => {
-            refreshDailyStats();
-        });
+        window.addEventListener("focus", () => { refreshDailyStats(); });
     }
-
+    
     init();
 </script>
 </body>
